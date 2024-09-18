@@ -17,6 +17,9 @@ public class Exercise2b {
    */
   public static List<Double> convertFilesizes(List<Double> files) {
     // TODO
-    return null;
+    for (int i = 1; i < files.size(); i++) {
+       files.set(i,files.get(i)/1000);
+    }
+    return files;
   }
 }
