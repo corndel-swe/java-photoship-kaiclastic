@@ -17,7 +17,7 @@ public class Exercise1b {
    * @returns {List<T>} The list with the last element at the front
    */
   public static <T> List<T> arrayRotate(List<T> list) {
-//    collections.swap(list,list.getFirst(),list.getLast());
+//    Collections.swap(list,list.getFirst(),list.getLast());
     // TODO
     list.addFirst(list.getLast());
     list.removeLast();
