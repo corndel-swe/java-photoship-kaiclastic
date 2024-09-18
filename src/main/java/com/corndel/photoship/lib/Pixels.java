@@ -100,10 +100,20 @@ public class Pixels {
      */
     public static List<Integer> blackAndWhite(List<Integer> rgb) {
         // Calculate the average of the red, green, and blue values
-
+        int sum = 0;
+        for (int i : rgb) {
+            sum += i;
+        }
+        int averageRgb = sum / rgb.size();
         // If the average is below 128, set all values to 0 (black); otherwise, set them
+        if (averageRgb <= 128) {
+            List<Integer> blackRgb = rgb.stream().map(rgbColour -> 0).toList();
+            return blackRgb;
+        } else {
+            List<Integer> whiteRgb = rgb.stream().map(rgbColour -> 225).toList();
+            return whiteRgb;
+        }
         // to 255 (white)
-        return null;
     }
 
     /**
@@ -119,10 +129,16 @@ public class Pixels {
      */
     public static List<Integer> colorChannel(List<Integer> rgb, char color) {
         // TODO
-        return null;
+
+        char[] colorChannel = {'r', 'g', 'b'};
+        int chosenColor = colorChannel.indexOf(color);
+        List<Integer> filteredRbg = rgb.stream().map(rgbColor, i -> rgb[rgbColor] == chosenColor ? RgbColor * 0 : RgbColor).toList();
+
+        return filteredRbg;
     }
 
     /**
+     * casting integer into double
      * Applies a sepia tone filter to the RGB list.
      * <p>
      * Sepia gives the image a warm, brownish tone, which is often seen in old
@@ -146,6 +162,7 @@ public class Pixels {
     }
 
     /**
+     * mathmin
      * Adjusts the brightness of an image by adding or subtracting a value from each
      * color channel.
      * <p>
