@@ -9,6 +9,12 @@ public class Pixels {
      * <p>
      * This filter removes the red channel entirely, making the image appear
      * more green/blue.
+     * for (int i : rgb) {
+     * sum += i;
+     * }
+     * int averageRgb = sum / rgb.size();
+     * // If the average is below 128, set all values to 0 (black); otherwise, set them
+     * if (averageRgb <= 128) {
      *
      * @param rgb A list containing the red, green, and blue values as integers.
      * @return The RGB list with the red value set to 0.
@@ -82,9 +88,8 @@ public class Pixels {
             sum += i;
         }
         int averageRgb = sum / rgb.size();
-        List<Integer> grayscaleRgb = rgb.stream().map(rgbColour -> averageRgb).toList();
+        return List.of(averageRgb, averageRgb, averageRgb);
         // Set all components to the average value to create a grayscale effect
-        return grayscaleRgb;
     }
 
     /**
@@ -100,6 +105,8 @@ public class Pixels {
      */
     public static List<Integer> blackAndWhite(List<Integer> rgb) {
         // Calculate the average of the red, green, and blue values
+        // asList
+        // replaceAll
         int sum = 0;
         for (int i : rgb) {
             sum += i;
@@ -107,11 +114,11 @@ public class Pixels {
         int averageRgb = sum / rgb.size();
         // If the average is below 128, set all values to 0 (black); otherwise, set them
         if (averageRgb <= 128) {
-            List<Integer> blackRgb = rgb.stream().map(rgbColour -> 0).toList();
-            return blackRgb;
+            return rgb.stream().map(rgbColour -> 0).toList();
+
         } else {
-            List<Integer> whiteRgb = rgb.stream().map(rgbColour -> 225).toList();
-            return whiteRgb;
+            return rgb.stream().map(rgbColour -> 225).toList();
+
         }
         // to 255 (white)
     }
@@ -126,15 +133,36 @@ public class Pixels {
      * @param rgb   A list containing the red, green, and blue values as integers.
      * @param color The color channel to keep ('r', 'g', or 'b').
      * @return The RGB list with only the specified color channel.
+     * <p>
+     * // method takes two arguments a list of integers rgb and a character of color
      */
     public static List<Integer> colorChannel(List<Integer> rgb, char color) {
         // TODO
+        int red = 0;
+        int green = 0;
+        int blue = 0;
 
-        char[] colorChannel = {'r', 'g', 'b'};
-        int chosenColor = colorChannel.indexOf(color);
-        List<Integer> filteredRbg = rgb.stream().map(rgbColor, i -> rgb[rgbColor] == chosenColor ? RgbColor * 0 : RgbColor).toList();
+        if (color == 'r') {
+            red = rgb.getFirst();
+        } else if (color == 'g') {
+            green = rgb.get(1);
+        } else if (color == 'b') {
+            blue = rgb.get(1);
+        }
 
-        return filteredRbg;
+
+//           switch (color) {
+//            case 'r':
+//                red = rgb.getFirst();
+//                break;
+//            case 'g':
+//                green = rgb.get(1);
+//                break;
+//            case 'b':
+//                blue = rgb.get(2);
+//                break;
+//        }
+        return List.of(red, green, blue);
     }
 
     /**
